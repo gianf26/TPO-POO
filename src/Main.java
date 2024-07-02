@@ -6,6 +6,11 @@ public class Main {
         // Creo un inventario
         Inventario inventario = new Inventario();
 
+        // Asigno el tipo de producto a cada componente
+        TipoProducto procesador = new TipoProducto("Procesador");
+        TipoProducto almacenamiento = new TipoProducto("Almacenamiento");
+        TipoProducto memoria = new TipoProducto("Memoria");
+
         // Creo algunos componentes
         // Procesadores
         Procesador cpu1 = new Procesador("CPU001", "Intel Core i7", 300, 10, 3.6F, 8);
@@ -34,23 +39,20 @@ public class Main {
         inventario.altaComponente(ram3);
 
         // Inventario inicial
-        System.out.println("\nInventario inicial:");
-        inventario.mostrarInventario();
+        Impresor.imprimirInventario(inventario);
 
         // Modifico un componente
         Procesador cpuModificado = new Procesador("CPU001", "Intel Core i7", 280, 10, 3.6F, 8);
         inventario.modificarComponente("CPU001", cpuModificado);
 
         // Inventario después de la modificación
-        System.out.println("\nInventario después de modificar el CPU001:");
-        inventario.mostrarInventario();
+        Impresor.imprimirInventario(inventario);
 
         // Elimino un componente
         inventario.bajaComponente("CPU004");
 
         // Inventario después de la baja
-        System.out.println("\nInventario después de eliminar el CPU004");
-        inventario.mostrarInventario();
+        Impresor.imprimirInventario(inventario);
 
         // "Registro" ventas
         Ventas ventas = new Ventas(inventario);
@@ -60,28 +62,24 @@ public class Main {
         ventas.registrarVenta("DSC001", 1);
 
         // Mostrar el inventario después de la venta
-        System.out.println("\nInventario después de la venta:");
-        inventario.mostrarInventario();
+        Impresor.imprimirInventario(inventario);
 
-        List<Componente> componentes = inventario.getComponentes();
-        System.out.println("\nLista de todos los componentes del inventario:");
-        System.out.println(componentes
-                .stream()
-                .map(componente -> componente.getNombre())
-                .collect(Collectors.toList()));
-
-        List<Procesador> procesadoresMasDe4Nucleos = inventario.getProcesadoresMasDe4Nucleos();
-        System.out.println("\nLista de procesadores con más de 4 núcleos:");
-        for (Procesador p : procesadoresMasDe4Nucleos) {
-            p.mostrarDetalles();
+        List<Componente> procesadores = inventario.getProductosPorTipo(procesador);
+        System.out.println("\nLista de los procesadores con más de 4 núcleos:");
+        for (Componente p : procesadores) {
+            if (((Procesador) p).tieneMasDe4Nucleos()) {
+                p.mostrarDetalles();
+            }
         }
 
         ventas.registrarVenta("CPU002", 3);
 
-        List<Almacenamiento> almacenamientosMasDe240 = inventario.getAlmacenamientoMayor240();
-        System.out.println("\nLista de los almacenamientos con más de 240GB de capacidad:");
-        for (Almacenamiento a : almacenamientosMasDe240){
-            a.mostrarDetalles();
+        List<Componente> almacenamientos = inventario.getProductosPorTipo(almacenamiento);
+        System.out.println("\nLista de los almacenamientos que tienen más de 240GB de capacidad:");
+        for (Componente a : almacenamientos){
+            if (((Almacenamiento) a).tieneMasDe240Gb()) {
+                a.mostrarDetalles();
+            }
         }
 
         ventas.registrarVenta("DSC003", 1);

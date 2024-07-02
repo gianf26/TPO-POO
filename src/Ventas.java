@@ -20,11 +20,12 @@ public class Ventas implements Vendible {
         if (componente != null) {
             if (componente.getStock() > cantidad) {
                 // Registrar la venta
-                System.out.println("Venta registrada: " + componente.getNombre() + ", Cantidad: " + cantidad);
+                System.out.println("Venta registrada: " + componente.getId() + ", " + componente.getNombre() + ", Cantidad: " + cantidad);
 
                 // Actualizar el inventario
                 componente.decrementarStock(cantidad);
-                System.out.println("Stock actualizado. Nuevo stock de " + componente.getNombre() + ": " + componente.getStock());
+                System.out.println("Stock actualizado. Nuevo stock de "
+                        + componente.getId() + ", " + componente.getNombre() + ": " + componente.getStock());
             } else {
                 System.out.println("Stock insuficiente para el componente" + componente.getNombre());
             }

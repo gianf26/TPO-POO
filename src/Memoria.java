@@ -30,4 +30,9 @@ public class Memoria extends Componente{
         System.out.println(getId() + ": " + getNombre() + ", Capacidad: " + capacidad +
                 "GB, Frecuencia: " + getFrecuencia() + " MHz, Precio: $" + getPrecio() + ", Stock: " + getStock());
     }
+
+    @Override
+    public String getTipoComponente() {
+        return "Memoria";
+    }
 }

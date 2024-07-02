@@ -55,4 +55,6 @@ public abstract class Componente {
     // Método abstracto
     public abstract void mostrarDetalles();
 
+    public abstract String getTipoComponente();
+
 }

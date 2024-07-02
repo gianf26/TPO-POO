@@ -20,4 +20,13 @@ public class Almacenamiento extends Componente{
         System.out.println(getId() + ": " + getNombre() + ", Capacidad: " + capacidad +
                 "GB, Precio $ " + getPrecio() + ", Stock " + getStock());
     }
+
+    @Override
+    public String getTipoComponente() {
+        return "Almacenamiento";
+    }
+
+    public boolean tieneMasDe240Gb() {
+        return capacidad > 240;
+    }
 }

@@ -30,5 +30,13 @@ public class Procesador extends Componente {
                 " GHz, Núcleos: " + nucleos + ", Precio: $" + getPrecio() + ", Stock: " + getStock());
     }
 
+    @Override
+    public String getTipoComponente() {
+        return "Procesador";
+    }
 
+
+    public boolean tieneMasDe4Nucleos() {
+        return nucleos > 4;
+    }
 }

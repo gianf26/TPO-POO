@@ -19,12 +19,12 @@ public class Inventario implements Inventariable{
     public void bajaComponente(String id) {
         for (int i = 0; i < componentes.size(); i++) {
             if (componentes.get(i).getId().equals(id)) {
-                System.out.println("Componente eliminado: " + componentes.get(i).getNombre());
+                System.out.println("\nComponente eliminado: " + componentes.get(i).getId() + ", " + componentes.get(i).getNombre());
                 componentes.remove(i);
                 return;
             }
         }
-        System.out.println("Componente no encontrado: " + id);
+        System.out.println("\nComponente no encontrado: " + id);
     }
 
     @Override
@@ -32,7 +32,7 @@ public class Inventario implements Inventariable{
         for (int i = 0; i < componentes.size(); i++) {
             if (componentes.get(i).getId().equals(id)) {
                 componentes.set(i, nuevoComponente);
-                System.out.println("Componente modificado: " + nuevoComponente.getNombre());
+                System.out.println("\nComponente modificado: " + nuevoComponente.getId() + ", " + nuevoComponente.getNombre());
                 return;
             }
         }
@@ -49,23 +49,12 @@ public class Inventario implements Inventariable{
         return this.componentes;
     }
 
-    public List<Procesador> getProcesadoresMasDe4Nucleos(){
-        return componentes.stream()
-                .filter(Componente -> Componente instanceof Procesador)
-                .map(componente -> (Procesador) componente)
-                .filter(Procesador -> Procesador.getNucleos() > 4)
-                .collect(Collectors.toList());
-    }
-
-    public List<Almacenamiento> getAlmacenamientoMayor240(){
-        return componentes.stream()
-                .filter(Componente -> Componente instanceof Almacenamiento)
-                .map(componente -> (Almacenamiento) componente)
-                .filter(almacenamiento -> almacenamiento.getCapacidad() > 240)
+    public List<Componente> getProductosPorTipo(TipoProducto tipoProducto){
+        return componentes
+                .stream()
+                .filter(Componente -> Componente.getTipoComponente().equals(tipoProducto.getTipo()))
                 .collect(Collectors.toList());
 
     }
-
-
 
 }
